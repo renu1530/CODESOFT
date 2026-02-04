@@ -1,97 +1,113 @@
-# # data_design
-
-# tasks = [
-#     {"id" : 1, "title" : "task_name", "status" : "pending"},
-#     {"id" : 2, "title" : "task_name", "status" : "pending"}
-# ]
-
+# to do list application
 
 tasks = []
 
-# Functin for ADD_TASK
+# Function for TASK ADD
 
-def Add_task():
-    
-    task_id = len(tasks) + 1
-    title = input("Enter task name : ")
-    status = input("Enter the task status : ")
-    task = {
+def task_add():
 
-        id : task_id,
-        "title" : title,
-        "status" : status
+  print("----  ADD TASKS   ----")
 
-        }
-    
-    tasks.append(task)
-    print("Task added susccesfully .")
+  task_id = len(tasks) + 1
+  task_title = input("Enter the task name : ")
+  task_status = input("Add the status of task : ")
 
-
-
-
-# Function for View all Tasks
-
-def view_tasks():
-    print("-----------   List of all Tasks   -----------\n")
-
-    if  not tasks:
-        print("no tasks found.")
-        return
-    
-    print("task_id \t title \t\t status")
-    print("------------------------------------------------")
-
-    for task in tasks:
-            print(f"{task[id]} \t\t {task['title']} \t\t {task['status']}")
+  task = {
+      "id" : task_id,
+      "title" : task_title,
+      "status" : task_status
+  }
+  tasks.append(task)
+  print('task added successfully')
 
 
 
-# Function for task Update
+# Function for TASK View
 
-def update_task():
-    for task in tasks:
-        if task["title"] == "title":
-           task["status"] = input("change status : ")
+def task_view():
+  print("----  VIEW TASKS   ----")
 
-           print("task updated successfully ")
-           return
-    print("not found")
+  print("Task ID \t\t Task Name \t\t Status")
+  for task in tasks:
+    print(f"{task['id']} \t\t\t {task['title']} \t\t\t {task['status']}")
+
+
+  if len(tasks) == 0:
+    print("No tasks found")
+
+  else:
+    print("No task found")
 
 
 
 
-# Function for application menu
+# Function for TASK Update
+
+def task_update():
+  print("----  UPDATE TASKS   ----")
+  task_id = int(input("Enter the task id : "))
+  for task in tasks:
+    if task['id'] == task_id:
+      task['title'] = input("Enter the updated task name : ")
+      task['status'] = input("Enter the updated status Complete/Pending: ")
+
+      print("task updated successfully")
+      break
+
+    else:
+      print("Task not found")
+
+
+
+# Function for task Delete
+
+def task_delete():
+  print("----  DELETE TASKS   ----")
+  task_id = int(input("Enter the task id : "))
+  for task in tasks:
+    if task['id'] == task_id:
+      tasks.remove(task)
+      print("task deleted successfully")
+      break
+
+    else:
+      print("Task not found")
+
+
+# Function for Application menu
 
 def menu():
+  while True:
+    print("-------- TO - DO - LIST - MENU  -------- ")
 
-    while True:
+    print('1. Add new task. ')
+    print('2. View all tasks. ')
+    print('3. Update tasks. ')
+    print('4. Delete tasks. ')
+    print('5. Click 5 for exit. ')
 
-        print("1. add tasks : ")
-        print("2. view tasks : ")
-        print("3. update task : ")
-        print("4. delete task : ")
-        print("5. click 5 to exit : ")
+    choice = int(input("Enter the choice : "))
 
-        choice = int(input("Enter option : "))
+    if choice == 1:
+      task_add()
 
-        if choice == 1:
-            Add_task()
-        
-        elif choice == 2:
-            view_tasks()
+    elif choice == 2:
+      task_view()
 
-        elif choice == 3:
-            update_task()
+    elif choice == 3:
+      task_update()
 
-        elif choice == 4:
-            delete_task()
+    elif choice == 4:
+      task_delete()
 
-        elif choice == 5:
-            print("program exited ")
-            break
+    elif choice == 5:
+      print('program exited ')
+      break
 
-        else:
-            print("invalid option")
-
+    else:
+      print("Invalid option")
 
 menu()
+
+
+
